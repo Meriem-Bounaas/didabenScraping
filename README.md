@@ -1,6 +1,10 @@
 categorie csv 
 
-id, parent, textFr, textEn
+id, parent, textAr, textFr
 
+
+
+
+articles
 
 

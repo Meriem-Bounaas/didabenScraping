@@ -1,0 +1,47 @@
+id,parent,textAr,textFr
+0,-1,أعمال تطبيقية,TRAVAUX PRATIQUES
+1,-1,مخبر وزجاجيات,LABORATOIRE ET VERREIE
+2,-1,المواد الكيميائية,PRODUITS CHIMIQUE
+3,-1,تشريح,ANATOMIE
+4,-1,ورش العمل والرياضة,ATELIERS ET SPORTS
+5,-1,إعلام آلي ومكتبيات,INFORMATIQUE ET BUREAUTIQUE
+6,-1,سندات تعليمية,SUPPORTS DIDACTIQUES
+6,0,فيزياء,Physique
+7,0,علوم الطبيعة والحياة ,Sciences de la nature et de la vie 
+8,0,جيولوجيا,GEOLOGIE
+9,0,الكهرباء والإلكترونيك,Electronique et électricité 
+10,0,تجارب في الكيمياء ,Expériences de chimie 
+11,0,علم الفلك ,ASTRONOMIE 
+12,0,	التجريب المدعم بالإعلام الآلي ,EXAO 
+13,0,البصريات,OPTIQUES
+14,1,زجاجيات ,Verrerie 
+15,1,مستلزمات المخبر ,Accessoires de laboratoire 
+16,1,أجهزة القياس,Appareils de mesures
+17,1,موازين ,Balances
+18,1,معدات المخبر ,Equipements de laboratoire 
+19,1,السمعي البصري والإسقاط,Audio-visuel et projection 
+20,1,المجاهر,MICROSCOPES
+21,2,الأحماض,ACIDES
+22,2,المعادن,Métaux
+23,2,الكواشف الملونة ,Indicateurs colorés 
+24,2,الأسس ,BASES 
+25,2,المواد المعدنية,Produits minéraux
+26,2, المواد العضوية,Produits organiques
+27,3,تشريح الإنسان,Anatomie humaine
+28,3, تشريح الحيوان,Anatomie animale
+29,3,تشريح نباتي,Anatomie végétale
+30,3,مجسمات الجيولوجيا,Modèles en géologie
+31,4,معدات ورشة العمل,Equipements d'atelier
+32,4,ملابس,Tenues
+33,4,كرات وشبكات,Ballons et filets
+34,4,الكؤوس والميداليات,Coupes et médailles
+35,4,الأعلام,Drapeaux
+36,4,متفرقات,Divers
+37,5,أجهزة الكمبيوتر والشاشات,Ordinateurs et écrans
+38,5,حواسب محمولة واللوحات,Laptops et tablettes
+39,5,المكاتب والطاولات,Bureaux et tables
+40,6,خرائط الجغرافيا,Cartes de géographie
+41,6,خرائط التاريخ ,Cartes d'histoire
+42,6,الشفافيات,Transparents
+43,6,اللوحات البيداغوجية,Planches pédagogiques
+44,6,أقراص مضغوطة تعليمية,CD multimédia

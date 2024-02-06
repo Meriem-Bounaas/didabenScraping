@@ -9,11 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "csv-writer": "^1.6.0",
     "puppeteer": "^21.10.0"
   },
   "type": "module",
-  "description": "",
-  "types": "module"
+  "description": ""
 }
-
-
