@@ -1,11 +1,18 @@
 import puppeteer from "puppeteer";
 import { createArrayCsvWriter } from 'csv-writer'
 
-const csvWriter = createArrayCsvWriter({
-  header: ['id', 'parent', 'textAr', 'textFr'],
-  path: 'categories.csv'
-});
 
+function writeToCsv(categories, filename) {
+  const csvWriter = createArrayCsvWriter({
+      header: ['id', 'parent', 'textAr', 'textFr'],
+      path: filename + '.csv'
+  });
+
+  csvWriter
+      .writeRecords(categories)
+      .then(() => console.log('Le fichier CSV "' + filename + '.csv" a été créé avec succès'))
+      .catch(error => console.error('Une erreur est survenue lors de la création du fichier CSV :', error));
+}
 
 const getCategories = async () => {
 
@@ -22,10 +29,6 @@ const getCategories = async () => {
     await page.goto("https://didaben.com/produit", {
         waitUntil: "domcontentloaded",
     });
-
-    function createCategoObject(id, parent, textFr, textAr) {
-      return { id, parent, textFr, textAr };
-  }
 
     const CategoriesFr = await page.evaluate(() => {
 
@@ -62,20 +65,54 @@ const getCategories = async () => {
         
   });
 
-  let objects = [];
+  // get product data 
+  const productsFr = await page.evaluate(() => {
+
+      const spans = document.querySelectorAll("span");
+
+      spans.forEach(span => {
+          if (span.textContent.includes('Produits')) {
+            span.click()
+          }
+      });
+
+      let itemsInfo = []
+
+      const linkItems = document.evaluate( "//div[@class='product-info']/h5/strong/a" ,document, null, XPathResult.ANY_TYPE, null );
+      // const hrefItems = linkItems.getAttribute('href')
+
+
+      // const link = Array.from(hrefItems).map((lien) => {
+      //   lien.click()
+      //   const category = document.querySelector('span').querySelector('.red')
+      //   const reference = document.querySelector('span').querySelector('.green')
+
+      //   itemsInfo.push([category, reference])
+      // });
+
+      return linkItems
+      
+  });
+
+  console.log(productsFr)
+
+  let categories = [];
   CategoriesAr.forEach((item, index) => {
-    objects.push([index, -1, CategoriesFr[index][0], item[0]]);
+    categories.push([index, -1, CategoriesFr[index][0], item[0]]);
   });
 
   CategoriesAr.forEach((item, index) => {
     item[1].forEach((sousCatego, ind)=>{
-      objects.push([objects.length, index, CategoriesFr[index][1][ind],sousCatego]);
+      categories.push([categories.length, index, CategoriesFr[index][1][ind],sousCatego]);
     })
   });
 
-  csvWriter
-    .writeRecords(objects)
-    .then(() => console.log('Le fichier CSV a été créé avec succès'));  
+  // csvWriter
+  //   .writeRecords(categories, 'categories.csv')
+  //   .then(() => console.log('Le fichier CSV a été créé avec succès'));  
+
+  writeToCsv(categories, 'categories')
+  // writeToCsv(products, 'products')
 
   // Close the browser
   await browser.close();
