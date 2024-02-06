@@ -65,22 +65,28 @@ const getCategories = async () => {
         
   });
 
+
+
+
+    // - open the URL website with Ar langage
+    await page.goto("https://didaben.com/produit/rechCatigoSplit/?ser=zafikor", {
+        waitUntil: "domcontentloaded",
+    });
+
+
+
+  page.on('console', msg => console.log('CLIENT LOG:', msg.text()));  
   // get product data 
   const productsFr = await page.evaluate(() => {
+    
+    
+    let itemsInfo = []
 
-      const spans = document.querySelectorAll("span");
-
-      spans.forEach(span => {
-          if (span.textContent.includes('Produits')) {
-            span.click()
-          }
-      });
-
-      let itemsInfo = []
-
-      const linkItems = document.evaluate( "//div[@class='product-info']/h5/strong/a" ,document, null, XPathResult.ANY_TYPE, null );
-      // const hrefItems = linkItems.getAttribute('href')
-
+    const linkItems = document.querySelectorAll( "div.product-info h5 strong a")
+      linkItems.forEach(span => {
+          itemsInfo.push(`https://didaben.com${span.getAttribute("href")}`);
+    });
+    
 
       // const link = Array.from(hrefItems).map((lien) => {
       //   lien.click()
@@ -90,11 +96,10 @@ const getCategories = async () => {
       //   itemsInfo.push([category, reference])
       // });
 
-      return linkItems
-      
+  return itemsInfo      
   });
 
-  console.log(productsFr)
+  console.log( productsFr)
 
   let categories = [];
   CategoriesAr.forEach((item, index) => {
@@ -106,10 +111,6 @@ const getCategories = async () => {
       categories.push([categories.length, index, CategoriesFr[index][1][ind],sousCatego]);
     })
   });
-
-  // csvWriter
-  //   .writeRecords(categories, 'categories.csv')
-  //   .then(() => console.log('Le fichier CSV a été créé avec succès'));  
 
   writeToCsv(categories, 'categories')
   // writeToCsv(products, 'products')
