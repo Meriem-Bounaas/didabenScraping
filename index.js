@@ -69,7 +69,7 @@ const getCategories = async () => {
 
   CategoriesAr.forEach((item, index) => {
     item[1].forEach((sousCatego, ind)=>{
-      objects.push([objects.length-1, index, CategoriesFr[index][1][ind],sousCatego]);
+      objects.push([objects.length, index, CategoriesFr[index][1][ind],sousCatego]);
     })
   });
 
