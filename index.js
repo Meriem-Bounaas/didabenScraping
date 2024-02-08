@@ -85,7 +85,7 @@ const getData = async () => {
     productLinks = [...productLinks,...itemLinks]
   }
 
-// open the Product detail's URL  
+// open Product detail's URL  
   const detailProduct  = await browser.newPage();
   let infoItems = []
   for (let index = 0; index < productLinks.length; index++) {
@@ -108,9 +108,8 @@ const getData = async () => {
       return infos
     })
 
-    infoItems = [...infoItem]
+    infoItems = [...infoItems, ...infoItem]
   }
-
 
   let categories = [];
   CategoriesAr.forEach((item, index) => {
@@ -125,10 +124,10 @@ const getData = async () => {
 
   let products = [];
   infoItems.forEach((item, index) => {
-    console.log([index, ...item])
     products = [...products, [index, ...item]];
   });
 
+  
   writeToCsv(categories, ['id', 'parent', 'textAr', 'textFr'],  'categories')
   writeToCsv(products, ['id', 'titrFr', 'categorieFr', 'ref', 'niveau', 'prix', 'img', 'description'], 'products')
 
